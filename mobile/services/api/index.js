@@ -1,7 +1,5 @@
-import auth from "./auth";
-import teachers from "./teachers";
-import channels from "./channels";
-import courses from "./courses";
-import sections from "./sections";
+import auth from './auth';
+import tasks from './tasks';
+import users from './users';
 
-export default { auth, teachers, channels, courses, sections };
+export default { auth, users, tasks };

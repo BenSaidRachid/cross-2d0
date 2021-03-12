@@ -1,14 +1,14 @@
-import axios from "axios";
-import { constants, urls } from "../../data";
-import storage from "../../helpers/storage";
-import { API_BASE_URL } from "../../data/params";
+import axios from 'axios';
+import { constants, urls } from '../../data';
+import storage from '../../helpers/storage';
+import { API_BASE_URL } from '../../data/params';
 
 const auth = {
     token: () => {
         return storage.get(constants.TOKEN);
     },
-    signUp: send => {
-        return axios.post(API_BASE_URL + urls.auth.signUp, send).then(({ data }) => {
+    register: send => {
+        return axios.post(API_BASE_URL + urls.api.auth.register, send).then(({ data }) => {
             const { userInfo, token } = data;
             storage.clear();
             storage.set(constants.TOKEN, token);
@@ -17,7 +17,7 @@ const auth = {
         });
     },
     login: send => {
-        return axios.post(API_BASE_URL + urls.auth.login, send).then(({ data }) => {
+        return axios.post(API_BASE_URL + urls.api.auth.login, send).then(({ data }) => {
             const { userInfo, token } = data;
             storage.clear();
             storage.set(constants.TOKEN, token);
@@ -26,8 +26,7 @@ const auth = {
         });
     },
     signOut: async () => {
-        await axios.post(API_BASE_URL + urls.auth.signOut);
-        return storage.clear();
+        storage.clear();
     },
     isAuth: () => {
         return new Promise((resolve, reject) => {
